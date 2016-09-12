@@ -2,9 +2,9 @@
 ### INSTRUCTIONS
     Use the command line of your system
     Run the following command
-'''shell
+```shell
     python fb1.py
-'''
+```
     Enjoy the program!!
 ### NOTE
     Only login, and logout has been started.
