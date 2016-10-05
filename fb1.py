@@ -12,9 +12,30 @@ from selenium.common.exceptions import TimeoutException as texc
 import sys
 
 import errno
+import socket
 from socket import error as socket_error
 
+# A function to check if internet connection is present
+# @param host is the server to connect to.(Here it is google)
+# @param port is the port to connect to
+# @param timeout is the number of seconds to wait before raising timeout exception
+def is_connected(host="8.8.8.8", port=53, timeout=10):
+    try:
+        socket.setdefaulttimeout(timeout)
+        socket.socket(socket.AF_INET, socket.SOCK_STREAM).connect((host,port))
+        return True
+    except Exception as ex:
+        print ex.message
+        return False
+    
+# Function to log the user in
+# @param driver is the webdriver
+# @param user is the username
+# @param pw is the password
 def login(driver, user, pw):
+    if not is_connected():
+        print "Not connected to the network"
+        return None
     try:
         user_name = driver.find_element_by_name("email")
         pwd = driver.find_element_by_name("pass")
@@ -25,7 +46,12 @@ def login(driver, user, pw):
     except nsee:
         print "It seems you are not on the same page!!"
 
+# A function to logout the user
+# @param driver is the webdriver
 def logout(driver):
+    if not is_connected():
+        print "Not connected to the network"
+        return None
     try:
         dropdown = driver.find_element_by_id("userNavigationLabel")
         dropdown.click()
@@ -34,6 +60,9 @@ def logout(driver):
         print "It seems you are not on the same page!!"
 
 def main():
+    if not is_connected():
+        print "Not connected to the internet"
+        return None
     driver = webdriver.Firefox()
     driver.implicitly_wait(10)
     driver.get("https://www.facebook.com/")
