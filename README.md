@@ -8,4 +8,10 @@
     Enjoy the program!!
 ### NOTE
     Only login, and logout has been started.
-    There are a lot of error-handling to be written,
+    There is a lot of error-handling to be written.
+    There seems to be a problem with the new version of selenium.
+    Selenium is unable to load the profile. This is the exact error message.
+```shell
+    selenium.common.exceptions.WebDriverException: Message: Can't load the profile.
+```
+    The code in the repo is currently NOT in working condition. Pull Requests to fix this issue are most welcome.
