@@ -1,6 +1,7 @@
 #!/usr/bin/python
 __author__ = 'anicodebreaker'
 
+from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException as nsee
@@ -63,7 +64,9 @@ def main():
     if not is_connected():
         print "Not connected to the internet"
         return None
-    driver = webdriver.Firefox()
+    #binary = FirefoxBinary('/path/to/firefox46.0.1') # from https://ftp.mozilla.org/pub/firefox/releases/46.0.1/
+    binary = FirefoxBinary('/usr/bin/firefox')
+    driver = webdriver.Firefox(firefox_binary=binary)
     driver.implicitly_wait(10)
     driver.get("https://www.facebook.com/")
     print "Hey, welcome to Anirudh's console FB manager"
